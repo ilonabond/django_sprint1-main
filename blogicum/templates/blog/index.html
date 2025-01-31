@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Лента записей{% endblock %}
+{% block content %}
+    <h1>Лента записей</h1>
+    {% for post in posts %}
+        <article>
+            <ul>
+                <li><strong>Место:</strong> {{ post.location }}</li>
+                <li><strong>Дата:</strong> {{ post.date }}</li>
+                <li><strong>Категория:</strong><a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
+            </ul>
+            <p>{{ post.text|slice:":100" }}</p>  <!-- Выводим первые 100 символов из полного текста -->
+            <a href="{% url 'blog:post_detail' id=post.id %}">Читать полный текст</a>
+        </article>
+        <hr>
+    {% endfor %}
+{% endblock %}
